@@ -11,7 +11,7 @@
   <body>
     <h2>Select seat at KES <span id="price-span">{{ schedule.price }} per seat</h2>
 
-
+    
     <ul class="showcase">
       <li>
         <div class="seat"></div>
@@ -27,10 +27,23 @@
       </li>
     </ul>
 
-    <div class="container">
+      <div class="container">
+          {% for seat in seats %}
+            {% if forloop.counter0|divisibleby:i %}
+              <div class="row">
+            {% endif %}
+                <div class="seat"></div>
+             
+            {% if forloop.counter|divisibleby:i %}
+              </div>
+            {% endif %}             
+          {% endfor %}  
+ 
+      </div>
+    <!-- <div class="container">
 
       <div class="row">
-        <div class="seat"></div>
+        <div class="seat occupied"></div>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
@@ -71,7 +84,7 @@
         <div class="seat"></div>
         <div class="seat"></div>
       </div>
-    </div>
+    </div> -->
 
     <p class="text">
       You have selected <span id="count">0</span> seats for a price of KES <span
