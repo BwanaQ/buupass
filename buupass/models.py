@@ -22,7 +22,6 @@ class Route(models.Model):
     def __str__(self):
         return self.departure_location +" >> "+ self.destination_location
 
-
 class Bus(models.Model):
     TWOBYTWO = '2-2'
     THREEBYTWO = '3-2'
@@ -34,7 +33,7 @@ class Bus(models.Model):
 
     capacity = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(67), MinValueValidator(14)])
     layout = models.CharField(choices=LAYOUTS, default=THREEBYTWO, max_length=3)
-    
+    booked_seat = models.ManyToManyField('Seat', blank=True,related_name="booked_seats")
     # available = models.DecimalField(decimal_places=0, max_digits=2)
 
     def __str__(self):
@@ -75,4 +74,5 @@ class Seat(models.Model):
                 instance.seat_set.create( )
     def __str__(self):
         return self.bus.bus_organisation.name + ' Bus No.' + str(self.bus.bus_registration) + ' Seat No.' + str(self.id)
+
 
